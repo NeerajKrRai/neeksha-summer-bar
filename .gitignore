@@ -1,0 +1,14 @@
+node_modules/
+.DS_Store
+
+# Android build outputs (the android/ project itself IS committed)
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+android/app/release/
+
+# signing — never commit keys
+*.keystore
+*.jks
+keystore.properties

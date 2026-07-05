@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Neeksha\'s Summer Bar</string>
+    <string name="title_activity_main">Neeksha\'s Summer Bar</string>
+    <string name="package_name">com.neeksha.summerbar</string>
+    <string name="custom_url_scheme">com.neeksha.summerbar</string>
+</resources>

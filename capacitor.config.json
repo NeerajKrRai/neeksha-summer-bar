@@ -1,0 +1,11 @@
+{
+  "appId": "com.neeksha.summerbar",
+  "appName": "Neeksha's Summer Bar",
+  "webDir": "www",
+  "android": {
+    "allowMixedContent": false
+  },
+  "server": {
+    "androidScheme": "https"
+  }
+}
