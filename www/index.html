@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>🍹 Neeksha's Summer Bar</title>
+<meta name="theme-color" content="#2D6A4F"/>
+<link rel="manifest" href="manifest.json"/>
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png"/>
+<link rel="apple-touch-icon" href="icons/icon-192.png"/>
+<link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body>
+
+
+<!-- ══ NICKNAME MODAL ══ -->
+<div id="nickModal">
+  <div class="nick-inner">
+    <div class="nick-chef">👨‍🍳</div>
+    <h2 class="nick-title">Welcome,<br><span>Masterchef!</span> 🌸</h2>
+    <p class="nick-sub">What shall we call you?<br>Type your nickname below!</p>
+    <input class="nick-input" id="nickInput" type="text" maxlength="20" placeholder="e.g. Chef Starlight" autocomplete="off" spellcheck="false"/>
+    <button class="nick-btn" onclick="saveNick()">✦ That's me!!</button>
+  </div>
+</div>
+
+<div id="nav"><button id="nBack">←</button><span id="nTitle">Summer Bar</span><span id="nStep"></span></div>
+<div id="toast"></div>
+<div id="sipR"></div>
+
+<!-- ══ LOADING ══ -->
+<div class="sc on" id="sLoad">
+  <div class="orb-wrap" id="orbitWrap">
+    <div class="orb-ring" style="width:200px;height:200px"></div>
+    <div class="orb-ring" style="width:300px;height:300px"></div>
+  </div>
+  <div class="ld-inner">
+    <p class="ld-sub">✦ Neeksha's</p>
+    <h1 class="ld-h1">Summer<br><span>Refreshment</span><br>Bar</h1>
+    <div class="ld-glass" id="ldGlass"></div>
+    <div class="ld-track"><div class="ld-fill"></div></div>
+    <p class="ld-pct" id="ldPct">Chilling the glasses…</p>
+  </div>
+</div>
+
+<!-- ══ DASHBOARD ══ -->
+<div class="sc" id="sDash">
+  <div class="da-bg">
+    <div class="da-circle" style="width:340px;height:340px;background:var(--gr-d);top:-80px;left:-90px;opacity:.38"></div>
+    <div class="da-circle" style="width:260px;height:260px;background:var(--ro-d);bottom:-50px;right:-50px;opacity:.28"></div>
+  </div>
+  <svg class="da-ghost" id="daGhost" viewBox="0 0 150 220" fill="none"></svg>
+  <div class="da-body">
+    <p class="da-ey" id="dashWelcome">Welcome, Masterchef ✦</p>
+    <h1 class="da-h1">Make<br><em>something</em><br>wonderful</h1>
+    <p class="da-desc">Craft your imaginary summer refreshment, step by step. Save it as a card forever.</p>
+    <button class="btn-p" onclick="startNewRun()">🏖️ Start a New Cocktail</button>
+    <button class="btn-s" onclick="go('sFile')">📁 My Cocktail File →</button>
+  </div>
+</div>
+
+<!-- ══ BEACH ══ -->
+<div class="sc" id="sBeach">
+  <div class="bch-sky"></div>
+  <div class="bch-sun"></div>
+  <div class="bch-ocean" id="bchOcean">
+    <div class="ow" style="background:linear-gradient(180deg,transparent,rgba(82,183,136,.18))"></div>
+    <div class="ow ow2" style="background:linear-gradient(180deg,transparent,rgba(82,183,136,.12))"></div>
+  </div>
+  <div class="bch-sand" id="bchSand"></div>
+  <div class="palm" style="left:2%;bottom:0" id="p1">🌴</div>
+  <div class="palm" style="right:4%;bottom:0;font-size:clamp(44px,11vw,82px)" id="p2">🌴</div>
+  <div class="stall-wrap" id="stallW">
+    <div class="stall-body" onclick="go('sFridge')">
+      <span class="stall-em">🍹</span>
+      <div class="stall-txt">Cocktail Stall</div>
+      <div class="stall-dot"></div>
+    </div>
+  </div>
+  <div class="walker" id="walker">
+    <span class="kao-char k1">♪( ´∀｀)</span><span class="kao-char k2">人(´∀｀ )♪</span>
+  </div>
+  <div class="bch-hint">Tap the <span>Cocktail Stall</span> to begin! 🍹</div>
+</div>
+
+<!-- ══ FRIDGE ══ -->
+<div class="sc" id="sFridge">
+  <div class="frost"></div>
+  <p class="scr-ey" style="margin-top:8px">Step 1 of 4</p>
+  <h2 class="scr-h1">Open the <span>Fridge</span> 🧊</h2>
+  <div class="sheet">
+    <div class="sh-hd"><div class="sh-title">Fruit Base</div><div class="sh-sub">Pick exactly 3 fruits for your refreshment</div></div>
+    <div class="sh-body"><div class="sec-lbl">🍉 Fresh Stocks</div><div class="ig" id="fruitGrid"></div></div>
+    <div class="sh-ft">
+      <div class="cnt-txt" id="fruitCnt">Choose 3 fruits to continue</div>
+      <button class="btn-sh" id="fruitNext" onclick="go('sFreezer')">Fly up to the Freezer ↑</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FREEZER ══ -->
+<div class="sc" id="sFreezer">
+  <div id="flkLayer"></div>
+  <p class="scr-ey" style="margin-top:8px">Step 2 of 4</p>
+  <h2 class="scr-h1">The <span>Freezer</span> ❄️</h2>
+  <div class="sheet">
+    <div class="sh-hd"><div class="sh-title">Ice &amp; Frozen Extras</div><div class="sh-sub">Pick as many as you like!</div></div>
+    <div class="sh-body">
+      <div class="sec-lbl">🌿 Herbs &amp; Ice</div><div class="ig" id="iceGrid"></div>
+      <div class="sec-lbl" style="margin-top:16px">🍓 Mini Frozen Fruits</div><div class="ig" id="frozenGrid"></div>
+    </div>
+    <div class="sh-ft"><button class="btn-sh on" onclick="go('sGarnish')">On to the Garnish Table ✦</button></div>
+  </div>
+</div>
+
+<!-- ══ GARNISH ══ -->
+<div class="sc" id="sGarnish">
+  <p class="scr-ey" style="margin-top:8px">Step 3 of 4</p>
+  <h2 class="scr-h1">Garnish <span>Table</span> ✨</h2>
+  <div class="sheet">
+    <div class="sh-hd"><div class="sh-title">Final Touches</div><div class="sh-sub">Add mini details, then flip the switch twice!</div></div>
+    <div class="sh-body"><div class="sec-lbl">🦚 Decorations</div><div class="ig" id="garnishGrid"></div></div>
+    <div class="sw-sec">
+      <div class="sw-lbl">Flip the switch twice when you're done 🔄</div>
+      <div class="sw-trk" id="swTrk" onclick="clickSw()"><div class="sw-knb"></div></div>
+      <div class="sw-hint" id="swHint">0 / 2 clicks</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ DRINK ══ -->
+<div class="sc" id="sDrink">
+  <div class="bbls" id="bblLayer"></div>
+  <div class="dk-top">
+    <div class="dk-badge">Your creation ✦</div>
+    <h2 class="dk-name" id="dkName">Summer Splash</h2>
+    <p class="dk-tag" id="dkTag">A refreshing blend of imagination &amp; summer magic</p>
+
+    <!-- girls + glass together -->
+    <div class="sippers-wrap">
+      <div class="sipper sip1" id="sipper1">
+        <span class="sipper-kao" id="kao1">♪( ´∀｀)</span>
+        <div class="sipper-straw" id="straw1" style="height:52px;background:#C97B84"></div>
+      </div>
+      <div class="glass-mid">
+        <div class="gl-stage" style="animation:gfl 3.5s ease-in-out infinite;position:relative">
+          <div class="gl-aura" id="glAura"></div>
+          <svg id="dkGlass" viewBox="0 0 150 220" fill="none" style="width:clamp(110px,28vw,170px)"></svg>
+        </div>
+      </div>
+      <div class="sipper sip2" id="sipper2">
+        <span class="sipper-kao" id="kao2">人(´∀｀ )♪</span>
+        <div class="sipper-straw" id="straw2" style="height:52px;background:#52B788"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dk-bot">
+    <div class="tilt-row"><span class="ph-tilt">📱</span><span>Tilt your phone &amp; sip!</span></div>
+    <button class="sip-cta" id="sipBtn" onclick="takeSip()">😋 Take a Sip!</button>
+    <button class="save-lnk" onclick="saveDrink()">💾 Save to my file</button>
+  </div>
+</div>
+
+<!-- ══ FILE ══ -->
+<div class="sc" id="sFile">
+  <div class="fl-topbar">
+    <div class="fl-heading">My Cocktail File 🍹</div>
+    <div class="fl-sub" id="flSub">0 creations</div>
+  </div>
+  <div class="fl-stage" id="flStage">
+    <div class="fl-track" id="flTrack"></div>
+  </div>
+  <div class="fl-dots" id="flDots"></div>
+  <div class="fl-swipe-hint" id="flSwipeHint">↑ swipe up &amp; down ↓</div>
+  <div class="fl-nav-row">
+    <button class="btn-s" style="width:100%" onclick="go('sDash')">← Back to Dashboard</button>
+  </div>
+</div>
+
+
+<!-- ══ LIVE PREVIEW GLASS (floats on fridge/freezer/garnish) ══ -->
+<div class="preview-glass-wrap" id="previewWrap">
+  <svg id="previewGlass" viewBox="0 0 150 220" fill="none"></svg>
+  <div class="preview-additions" id="previewAdditions"></div>
+</div>
+
+<!-- ══ HERB PACK MODAL ══ -->
+<div id="herbModal">
+  <div class="hm-sheet" id="herbSheet">
+    <div class="hm-handle"></div>
+    <div class="hm-title">🎁 Herb Pack!</div>
+    <div class="hm-sub">A bundle of fresh summer herbs — all going in your drink!</div>
+    <div class="hm-herbs" id="herbList"></div>
+    <div class="hm-swipe-hint">↓ swipe down to throw away the packaging</div>
+    <button class="hm-drop" onclick="confirmHerbPack()">🌿 Drop them in!</button>
+  </div>
+</div>
+
+<!-- ══ TEA BAG MODAL ══ -->
+<div id="teaModal">
+  <div class="tm-sheet" id="teaSheet">
+    <div class="tm-handle"></div>
+    <div class="tm-title">🫖 Mini Tea Bag!</div>
+    <div class="tm-sub">Dip it in and watch the iced tea cloud bloom!</div>
+    <div class="tm-bag-display">🫖</div>
+    <div class="tm-teas">
+      <div class="tm-tea-row"><span>🍋</span> Lemon Iced Tea</div>
+      <div class="tm-tea-row"><span>🍑</span> Peach Iced Tea</div>
+      <div class="tm-tea-row"><span>🌹</span> Rose Iced Tea</div>
+      <div class="tm-tea-row"><span>🍵</span> Summer Green Tea</div>
+    </div>
+    <div class="tm-swipe-hint">↓ swipe down to throw away the wrapper</div>
+    <button class="tm-drop" onclick="confirmTeaBag()">🫖 Dip it in!</button>
+  </div>
+</div>
+
+
+<!-- ══ SAKURA GLAZE WIDGET ══ -->
+<div id="glazeWidget" onclick="go('sStore')">
+  <div class="glaze-flower">
+    <div class="glaze-petal"></div>
+    <div class="glaze-petal"></div>
+    <div class="glaze-petal"></div>
+    <div class="glaze-petal"></div>
+    <div class="glaze-petal"></div>
+    <div class="glaze-center" id="glazeCenter">0</div>
+  </div>
+  <div class="glaze-count" id="glazeCount">🌸 0</div>
+</div>
+
+<!-- ══ BUY POP ══ -->
+<div class="buy-pop" id="buyPop">
+  <div class="buy-pop-inner">
+    <div class="buy-pop-em" id="buyPopEm">🌸</div>
+    <div class="buy-pop-txt" id="buyPopTxt">Bought!</div>
+    <div class="buy-pop-sub" id="buyPopSub">Added to your collection!</div>
+  </div>
+</div>
+
+<!-- ══ SAKURA STORE ══ -->
+<div class="sc" id="sStore">
+  <div class="store-stars" id="storeStars"></div>
+  <div style="display:flex;flex-direction:column;align-items:center;z-index:5;width:100%;padding:0 14px">
+    <div class="store-bal">
+      <span class="store-bal-flower">🌸</span>
+      <div>
+        <div class="store-bal-txt"><span id="storeBal">0</span> Sakura Glaze</div>
+        <div class="store-bal-sub">TAP VIP INGREDIENTS TO EARN MORE</div>
+      </div>
+    </div>
+  </div>
+  <div class="store-sections" id="storeSections"></div>
+</div>
+
+<!-- ══ UNLOCK OVERLAY ══ -->
+<div id="unlockOverlay">
+  <div class="ul-sparkle" id="ulSparkle"></div>
+  <div class="ul-lock">🔓</div>
+  <h2 class="ul-title">Secret Pantry<br>Unlocked!! ✨</h2>
+  <p class="ul-sub">You made 10 cocktails!! The VIP ingredients are all yours now 🌸</p>
+  <button class="ul-btn" onclick="closeUnlock()">✦ Let me in!!</button>
+</div>
+
+<!-- ══ SECRET PANTRY ══ -->
+<div class="sc" id="sPantry">
+  <div class="pantry-stars" id="pantryStars"></div>
+  <div class="pantry-lock-badge" style="z-index:5">Step 4 of 4 ✦ VIP</div>
+  <h2 class="pantry-h1" style="margin-bottom:18px">Secret <span>Pantry</span> 🔒</h2>
+  <div id="pantryLocked" class="pantry-locked-msg" style="display:none">
+    <div class="lock-icon">🔒</div>
+    <p style="font-family:'Playfair Display',serif;font-size:clamp(18px,5vw,26px);color:#FFD700;line-height:1.3">Soz!! Only for VIP!! 👑</p>
+    <p>Become a VIP by making<br><strong>10 yummy cocktails!!</strong><br>You've made <strong id="pantryCount">0</strong> so far! 🍹</p>
+    <div class="pantry-progress"><div class="pantry-progress-fill" id="pantryFill"></div></div>
+    <button class="go-btn" style="margin-top:16px;font-size:clamp(14px,3.5vw,18px);padding:14px 28px" onclick="go('sDrink')">Skip &amp; Sip anyway! 🍹</button>
+  </div>
+  <div id="pantryUnlocked" style="width:100%;display:none;flex-direction:column;align-items:center;gap:0;overflow:hidden;flex:1">
+    <div class="sheet" style="margin:0 14px;max-height:none;flex:1;overflow:hidden;display:flex;flex-direction:column">
+      <div class="sh-hd"><div class="sh-title">VIP Ingredients ✨</div><div class="sh-sub">Pick any VIP extras for your cocktail!</div></div>
+      <div class="sh-body" style="flex:1;overflow-y:auto"><div class="vip-grid" id="vipGrid"></div></div>
+      <div class="sh-ft">
+        <button class="go-btn" id="goBtn" onclick="goSip()">GO!! 🍹✨</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ STRAW PICKER MODAL ══ -->
+<div id="strawModal">
+  <div class="sm-sheet">
+    <div class="sm-handle"></div>
+    <div class="sm-title">Pick your straws! 🧉</div>
+    <div class="sm-sub">Each girl gets her own colour straw — tap a colour to choose!</div>
+    <div class="sm-girls">
+      <div class="sm-girl">
+        <div class="sm-girl-name">Girl 1</div>
+        <div class="sm-girl-kao">♪( ´∀｀)</div>
+        <div class="sm-color-row" id="swatchRow1"></div>
+      </div>
+      <div class="sm-divider"></div>
+      <div class="sm-girl">
+        <div class="sm-girl-name">Girl 2</div>
+        <div class="sm-girl-kao">人(´∀｀ )♪</div>
+        <div class="sm-color-row" id="swatchRow2"></div>
+      </div>
+    </div>
+    <div class="sm-preview" id="strawPreview">
+      <span>Preview:</span>
+      <span class="sm-straw-preview" id="prevStraw1"></span>
+      <span style="font-size:16px">🥤</span>
+      <span class="sm-straw-preview" id="prevStraw2"></span>
+    </div>
+    <button class="sm-go" onclick="closeStrawModal()">✦ Let's drink!</button>
+  </div>
+</div>
+
+<!-- ══ RENAME MODAL ══ -->
+<div id="renameModal" onclick="closeRename(event)">
+  <div class="rm-sheet">
+    <div class="rm-handle"></div>
+    <div class="rm-title">Name your download 🍹</div>
+    <div class="rm-sub">Give this cocktail card a custom filename — it'll save as a .png with that name!</div>
+    <input class="rm-input" id="rmInput" type="text" placeholder="e.g. My Summer Splash" maxlength="60" autocomplete="off" spellcheck="false"/>
+    <div class="rm-row">
+      <button class="rm-cancel" onclick="closeRename()">Cancel</button>
+      <button class="rm-save" onclick="confirmDownload()">⬇ Save Image</button>
+    </div>
+  </div>
+</div>
+
+<!-- hidden canvas for PNG export -->
+<canvas id="expCvs" style="display:none" width="800" height="480"></canvas>
+
+<!-- One shared global scope: classic scripts, load order matters (inline onclick handlers rely on these globals) -->
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/cocktail.js"></script>
+<script src="js/reactions.js"></script>
+<script src="js/screens.js"></script>
+<script src="js/glaze.js"></script>
+<script src="js/drink.js"></script>
+<script src="js/file.js"></script>
+<script src="js/fx.js"></script>
+<script src="js/pwa.js"></script>
+</body>
+</html>

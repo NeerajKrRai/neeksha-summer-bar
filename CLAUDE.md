@@ -1,6 +1,6 @@
 # CLAUDE.md — Neeksha's Summer Refreshment Bar
 
-Kawaii make-believe cocktail-maker app built by **Neeksha (age 8)** with Claude; her dad **Neeraj** is continuing it here. Currently a single self-contained HTML file, headed toward PWA + Android.
+Kawaii make-believe cocktail-maker app built by **Neeksha (age 8)** with Claude; her dad **Neeraj** is continuing it here. Now a PWA (web assets in `www/`) wrapped for Android with **Capacitor** (`android/`), headed for Google Play as a children's app.
 
 ## Read first
 
@@ -10,19 +10,27 @@ Kawaii make-believe cocktail-maker app built by **Neeksha (age 8)** with Claude;
 
 - **Age-appropriate always** — Neeksha is 8. All "cocktail" content is imaginary make-believe (fruits, herbs, tea — no alcohol references). Defer parental decisions to Neeraj.
 - **Keep the aesthetic** — kawaii/anime visual language, kaomoji characters `♪( ´∀｀)` `人(´∀｀ )♪`, soft palette (rosy charcoal `#2B2B2B`, royal green `#2D6A4F`/`#52B788`, dusty rose `#C97B84`), Playfair Display + DM Sans.
-- **No backend** — runs entirely in the browser; state lives in localStorage (`nk_ck`, `nk_glaze`, `nk_owned`, `nk_chef`).
+- **No backend, no network** — runs entirely in the browser; state lives in localStorage (`nk_ck`, `nk_glaze`, `nk_owned`, `nk_chef`, `nk_vip`). Fonts are self-hosted in `www/fonts/`; the Android manifest declares **zero permissions** (not even INTERNET). Never add an external request or SDK without Neeraj signing off — the children's-compliance posture (see `COMPLIANCE.md`) depends on it.
 
 ## Gotchas (learned the hard way — see handover §Known Issues)
 
-- Some **kaomoji contain hidden backticks** that break JS template literals. After editing anything near kaomoji strings, extract the inline `<script>` and run `node --check` on it.
+- Some **kaomoji contain hidden backticks** that break JS template literals. After editing anything near kaomoji strings, run `node --check` on the edited `js/*.js` file.
 - Don't store generated images in localStorage (`QuotaExceededError`) — generate fresh on download.
 - No `confirm()` dialogs — blocked on many mobile browsers.
 - Don't rely on `event.target` inside arrow functions — pass the element as a parameter.
 
-## Current state & roadmap
+## Current state (2026-07-05)
 
-- `neeksha-summer-app.html` (~2,030 lines: ~530 CSS, ~1,170 JS) — the whole app. JS syntax verified clean as of import.
-- Roadmap from handover: **1)** split into multi-file structure (index.html, css/, js/ modules) → **2)** PWA (manifest.json + service worker) → **3)** Android via Bubblewrap/TWA or Capacitor → Play Store. Polish ideas: Web Audio ASMR, straw animation, haptics, time-of-day beach.
+- **Layout:** `www/` is the whole web app (Capacitor `webDir`): `index.html`, `css/styles.css`, `js/` (10 classic scripts in load order: `data, app, cocktail, reactions, screens, glaze, drink, file, fx, pwa`), `fonts/` (self-hosted woff2), `icons/`, `manifest.json`, `sw.js`. `android/` is the generated Capacitor project (committed; build outputs gitignored). `resources/` holds icon/splash source art.
+- **Classic scripts, one global scope — NOT ES modules.** Inline `onclick="…"` handlers in index.html call these globals, and script load order matters. Don't add `type="module"` or `import`/`export` without reworking all inline handlers.
+- **Roadmap:** ~~1) multi-file split~~ ✅ → ~~2) PWA~~ ✅ → **3) Play Store** — see `COMPLIANCE.md` (launch runbook) and `PRIVACY.md` (ready to host). Polish ideas: Web Audio ASMR, straw animation, haptics, time-of-day beach.
+- A max-effort review (2026-07-05) fixed 15 verified bugs; notable behaviors that are now DELIBERATE: glaze is earned at save-time (5/VIP item, not on tile-tap); VIP unlock persists via `nk_vip` (deleting cards can't revoke it); herb pack/tea bag/VIP picks live in `gSel` like every other selection; one save per drink (`saving` guard); auto-navigation timers are cancelled by any manual `go()`.
+
+## Build & preview
+
+- Web preview: `.claude/launch.json` → `summer-bar` (4173) / `summer-bar-test` (4174), both `python3 -m http.server --directory www`.
+- Android: `npx cap sync android` after ANY `www/` change, then `npx cap open android` (Android Studio builds/signs; no system Java needed).
+- Shipping a web/PWA update? Bump `CACHE` in `www/sw.js` — the service worker is cache-first and `ignoreSearch:true`, so query-string cache-busting does NOT work.
 
 ## Working style
 

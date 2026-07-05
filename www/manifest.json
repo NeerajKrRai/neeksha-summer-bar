@@ -1,0 +1,16 @@
+{
+  "name": "Neeksha's Summer Bar",
+  "short_name": "Summer Bar",
+  "description": "A kawaii make-believe summer refreshment bar — mix imaginary fruit drinks, collect cards, earn Sakura Glaze. All pretend, all ages.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#181818",
+  "theme_color": "#2D6A4F",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
