@@ -31,6 +31,7 @@ Kawaii make-believe cocktail-maker app built by **Neeksha (age 8)** with Claude;
 - Web preview: `.claude/launch.json` → `summer-bar` (4173) / `summer-bar-test` (4174), both `python3 -m http.server --directory www`.
 - Android: `npx cap sync android` after ANY `www/` change, then `npx cap open android` (Android Studio builds/signs; no system Java needed).
 - Shipping a web/PWA update? Bump `CACHE` in `www/sw.js` — the service worker is cache-first and `ignoreSearch:true`, so query-string cache-busting does NOT work.
+- **Live web hosting:** GitHub repo `NeerajKrRai/summer-bar`; the site is the `gh-pages` branch (refresh it via `git commit-tree HEAD:www` + force-push; `.nojekyll` required). Public URL **https://apps.neeksha.com/summer-bar/** — the domain lives on the user-site hub repo `NeerajKrRai.github.io` ("Neeksha's Apps" landing page; new apps = new repos, they appear under the same domain automatically). Cloudflare proxies the `apps` CNAME (orange, SSL "Full"), so TLS is Cloudflare's cert — don't set "Full (strict)" unless GitHub's own cert has been minted (needs the record temporarily grey).
 
 ## Working style
 

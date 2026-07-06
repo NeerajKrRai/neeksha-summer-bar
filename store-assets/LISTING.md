@@ -43,6 +43,6 @@ Built with love by Neeksha (age 8) and her dad. 人(´∀｀ )♪ ～♥
   s8-straws, s7-pantry, s2-beach (max 8).
 - Feature graphic: store-assets/feature-graphic.png (1024×500).
 - App icon: www/icons/icon-512.png (512×512).
-- Privacy policy URL: https://neeksha.com/privacy.html
+- Privacy policy URL: https://apps.neeksha.com/summer-bar/privacy.html
 - Web/PWA version (shareable, also good for the "website" listing field):
-  https://neeksha.com
+  https://apps.neeksha.com/summer-bar/ (hub: https://apps.neeksha.com)
