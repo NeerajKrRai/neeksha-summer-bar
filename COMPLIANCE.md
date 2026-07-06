@@ -40,9 +40,11 @@ and store assets, not engineering.
 
 ## 3. Data safety form & privacy policy
 
-- ☐ Host `PRIVACY.md` at a public URL (GitHub Pages of the repo is fine) and
-  paste the URL in *App content → Privacy policy*. **Required even though the
-  app collects nothing** — all children-targeting apps must link one.
+- ☑ **DONE** — privacy policy is live at
+  **https://neerajkrrai.github.io/neeksha-summer-bar/privacy.html** — paste
+  that URL in *App content → Privacy policy*. (The full web app is live at
+  https://neerajkrrai.github.io/neeksha-summer-bar/ — same `www/` folder,
+  redeploy by refreshing the `gh-pages` branch from `HEAD:www`.)
 - ☐ Data safety form: answer **No** to data collection and sharing throughout.
   (Truthful because: no network permission → no transmission is possible.)
 
