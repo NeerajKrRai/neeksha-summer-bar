@@ -108,7 +108,20 @@ extra straw colours) — say the word and it can be built.
 - If you later add cloud sync/sharing, that changes everything (COPPA/UK-GDPR
   data-controller obligations) — decide deliberately, not by accident.
 
-## 9. Known creative quirks (left as-is — Neeksha's art direction)
+## 9. Domain & edge security (configured 6 Jul 2026)
+
+Applied on the `neeksha.com` Cloudflare zone: SPF `v=spf1 -all` + DMARC
+`p=reject` + null DKIM (nobody can spoof @neeksha.com email), DNSSEC enabled
+(verify it left "pending"), minimum TLS 1.2, HSTS 6-month, and a transform
+rule adding `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`,
+`Referrer-Policy: strict-origin-when-cross-origin` to all responses.
+Deliberately NOT set: `Permissions-Policy` (would block the motion sensors
+tilt-to-sip needs). Manual/dashboard items: Bot Fight Mode toggle, 2FA on
+GitHub + Cloudflare accounts. If Cloudflare **Web Analytics** is ever enabled,
+add an honest "cookieless visitor counting on the website" line to
+`www/privacy.html` — the Android app remains zero-network regardless.
+
+## 10. Known creative quirks (left as-is — Neeksha's art direction)
 
 - Store item "Crystal Spoon" uses 🩴 (a sandal) and "Blossom Stirrer" uses 🪥
   (a toothbrush). Possibly intentional 8-year-old whimsy. Ask the boss. 🌸

@@ -4,7 +4,8 @@ Kawaii make-believe cocktail-maker app built by **Neeksha (age 8)** with Claude;
 
 ## Read first
 
-**`HANDOVER_for_Neeraj.md`** is the full handover: all 9 screens, features, localStorage keys, known issues, and the packaging roadmap. Don't skip it.
+- **This file** is current; **`COMPLIANCE.md`** is the Play-launch runbook; **`store-assets/LISTING.md`** has the store copy/assets.
+- **`HANDOVER_for_Neeraj.md`** is the original handover from Neeksha's sessions — good for feature intent and history, but it describes the retired single-file era (pre-`www/`, pre-fixes); where it disagrees with this file, this file wins.
 
 ## Hard constraints
 
