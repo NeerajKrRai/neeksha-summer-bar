@@ -40,11 +40,12 @@ and store assets, not engineering.
 
 ## 3. Data safety form & privacy policy
 
-- ☑ **DONE** — privacy policy is live at
-  **https://neerajkrrai.github.io/neeksha-summer-bar/privacy.html** — paste
-  that URL in *App content → Privacy policy*. (The full web app is live at
-  https://neerajkrrai.github.io/neeksha-summer-bar/ — same `www/` folder,
-  redeploy by refreshing the `gh-pages` branch from `HEAD:www`.)
+- ☑ **DONE** — privacy policy is live at **https://neeksha.com/privacy.html**
+  — paste that URL in *App content → Privacy policy*. (The full web app is
+  live at **https://neeksha.com** — GitHub Pages with the custom domain,
+  DNS on Cloudflare (4× A records + www CNAME, DNS-only/grey cloud), HTTPS
+  enforced. Redeploy by refreshing the `gh-pages` branch from `HEAD:www`;
+  the CNAME file in `www/` keeps the domain attached.)
 - ☐ Data safety form: answer **No** to data collection and sharing throughout.
   (Truthful because: no network permission → no transmission is possible.)
 
