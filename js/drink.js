@@ -69,6 +69,7 @@ function initDrink(){
   document.getElementById('dkName').textContent=ckName;
   document.getElementById('dkTag').textContent=`${gSel.fruitGrid.map(x=>x.e).join(' ')} — a refreshing blend just for you`;
   _fillGlass(document.getElementById('dkGlass'),lc,lc2,'transparent',fe,gs,'dk');
+  setGlassFill('dk',1); // fresh drink starts full
   document.getElementById('glAura').style.background=lc;
   // apply straw colours
   document.getElementById('straw1').style.background=straw1Col;
@@ -164,6 +165,8 @@ function showBubble(num, text){
 
 function takeSip(){
   sipCnt++;
+  // the cup drains a little with every sip — empty by the last (9th) sip
+  drainGlassTo('dk', Math.max(0, 1 - sipCnt/9), 550);
   const idx=Math.min(sipCnt-1, GIRL1_STATES.length-1);
   const s1=GIRL1_STATES[idx];
   const s2=GIRL2_STATES[idx];
