@@ -1,6 +1,6 @@
 // Neeksha's Summer Bar — offline-first service worker.
 // Everything is local and static: cache-first with a versioned precache.
-const CACHE = 'summer-bar-v1';
+const CACHE = 'summer-bar-v2';
 const ASSETS = [
   './',
   './index.html',
